@@ -1,0 +1,18 @@
+The steps involved in DES are:
+1. Initial Permutation
+2. Rounds
+    a. Expansion Permutation
+    b. XOR with round key
+    c. Substitution (S-box)
+    d. Last permutation
+3. 32-bit swap
+4. Inverse Initial Permutation
+
+The steps involved in Key generation are:
+1. Input key is permuted by choice 1
+2. Separate into two segments
+3. Both circularly shifted 1-2 bits
+4. Permuted by choice 2
+5. 3-4 repeated each round
+
+64 bit key input, first 56 are independent and last 8 are parity checking

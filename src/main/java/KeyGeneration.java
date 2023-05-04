@@ -1,12 +1,23 @@
 import java.util.List;
+import java.util.Random;
 
 public class KeyGeneration {
 
-    private List<String> keyString;
+    private String keyString;
+    private String leftSide;
+    private String rightSide;
 
     public KeyGeneration(String fileName) {
+        keyString = "";
+        leftSide = "";
+        rightSide = "";
+
         try {
-            keyString = Utility.readAllLines(fileName);
+            List<String> convertString = Utility.readAllLines(fileName);
+
+            for (String s : convertString) {
+                keyString += s;
+            }
         }
 
         catch (Exception e) {
@@ -14,24 +25,49 @@ public class KeyGeneration {
         }
     }
 
-    //TO-DO
-    public List<String> leftSide() {
+    public String getKey() {
         return keyString;
     }
 
-    //TO-DO
-    public List<String> rightSide() {
-        return keyString;
+    public String getLeftSide() {
+        keySeparation();
+
+        return leftSide;
+    }
+
+    public String getRightSide() {
+        return leftSide;
+    }
+
+    private void keySeparation() {
+        for (int i=0; i<keyString.length(); i++) {
+            if (i < keyString.length()/2) {
+                leftSide = keyString.substring(i, i+1);
+                continue;
+            }
+
+            rightSide = keyString.substring(i, i+1);
+        }
     }
 
     //TO-DO
-    private List<String> keySeparation() {
-        return keyString;
-    }
+    public void shiftKey() {
+        int shiftAmount;
+        String outputString = "";
+        Random random = new Random();
 
-    //TO-DO
-    public List<String> shiftKey() {
-        return keyString;
+        shiftAmount = random.nextInt(1,3);
+
+        for (int i=0; i<keyString.length(); i++) {
+            if (i-shiftAmount < 0) {
+                outputString += keyString.substring(keyString.length()+(i-shiftAmount), keyString.length()+((i+1)-shiftAmount));
+                continue;
+            }
+
+            outputString += keyString.substring(i-shiftAmount, (i+1)-shiftAmount);
+        }
+
+        keyString = outputString;
     }
 
 

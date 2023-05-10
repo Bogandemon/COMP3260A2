@@ -16,3 +16,7 @@ The steps involved in Key generation are:
 5. 3-4 repeated each round
 
 64 bit key input, first 56 are independent and last 8 are parity checking
+
+The test file is similar to that in the specification. As such, the first two rows are
+plaintext with one bit difference, and the second two rows are the keys with one bit
+difference.

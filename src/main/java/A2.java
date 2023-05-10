@@ -7,9 +7,12 @@ public class A2 {
         List<String> plaintext = new ArrayList<>();
         KeyGeneration key = new KeyGeneration("src/resources/Key.txt");
 
-        key.shiftKey(1, false);
         System.out.println(key.getLeftSide());
         System.out.println(key.getRightSide());
+
+        key.roundPermute();
+
+        System.out.println(key.getKeyString());
 
         try {
             plaintext = Utility.readAllLines("src/resources/Plaintext.txt");

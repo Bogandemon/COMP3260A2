@@ -10,7 +10,7 @@ import java.util.List;
 
 public class KeyGeneration {
 
-    private String keyString; //String variable that holds the key obtained from the text file.
+    private String keyString; //String variable that holds the key obtained from the text file and permutation from permutated choice 2.
     private String leftSide; //String variable that holds the left (C) portion of the key during rounds.
     private String rightSide; //String variable that holds the right (D) portion of the key during rounds.
     private int[][] permutationChoice1; //2D list variable used for the initial permutation used on the key.
@@ -76,15 +76,19 @@ public class KeyGeneration {
     }
 
     public void roundPermute() {
+        String outputString = "";
+        String tempCombine = leftSide + rightSide;
+        int keyCharacter = 0;
 
-    }
+        keyString = "";
 
-    public String getLeftSide() {
-        return leftSide;
-    }
+        for (int i=0; i< permutationChoice2.length; i++) {
+            for (int m = 0; m<8; m++) {
+                keyCharacter = permutationChoice2[i][m];
 
-    public String getRightSide() {
-        return rightSide;
+                keyString += tempCombine.substring(keyCharacter - 1, keyCharacter);
+            }
+        }
     }
 
     public void shiftKey(int shiftAmount, boolean leftCheck) {
@@ -99,10 +103,10 @@ public class KeyGeneration {
             loopString = rightSide;
         }
 
-        for (int i=0; i<loopString.length(); i++) {
-            int index = (i+shiftAmount) % 28;
+        for (int i = 0; i < loopString.length(); i++) {
+            int index = (i + shiftAmount) % 28;
 
-            outputString += loopString.substring(index, index+1);
+            outputString += loopString.substring(index, index + 1);
         }
 
         if (leftCheck) {
@@ -114,5 +118,15 @@ public class KeyGeneration {
         }
     }
 
+    public String getKeyString() {
+        return keyString;
+    }
 
+    public String getLeftSide() {
+        return leftSide;
+    }
+
+    public String getRightSide() {
+        return rightSide;
+    }
 }

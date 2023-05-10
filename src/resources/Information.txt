@@ -12,7 +12,7 @@ The steps involved in Key generation are:
 1. Input key is permuted by choice 1 (done)
 2. Separate into two segments (done)
 3. Both circularly shifted 1-2 bits (done)
-4. Permuted by choice 2
+4. Permuted by choice 2 (done???)
 5. 3-4 repeated each round
 
 64 bit key input, first 56 are independent and last 8 are parity checking

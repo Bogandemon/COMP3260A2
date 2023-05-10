@@ -7,6 +7,7 @@ public class A2 {
         List<String> plaintext = new ArrayList<>();
         KeyGeneration key = new KeyGeneration("src/resources/Key.txt");
 
+        key.shiftKey(1, false);
         System.out.println(key.getLeftSide());
         System.out.println(key.getRightSide());
 

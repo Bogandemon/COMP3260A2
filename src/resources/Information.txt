@@ -9,9 +9,9 @@ The steps involved in DES are:
 4. Inverse Initial Permutation
 
 The steps involved in Key generation are:
-1. Input key is permuted by choice 1
-2. Separate into two segments
-3. Both circularly shifted 1-2 bits
+1. Input key is permuted by choice 1 (done)
+2. Separate into two segments (done)
+3. Both circularly shifted 1-2 bits (done)
 4. Permuted by choice 2
 5. 3-4 repeated each round
 

@@ -6,7 +6,6 @@
  * Description: Utility class used for reading file and providing the result as output.
  */
 import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

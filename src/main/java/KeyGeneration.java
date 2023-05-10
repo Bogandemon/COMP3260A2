@@ -1,13 +1,20 @@
+/*
+ * Classname: KenGeneration
+ * Programmer: Kyle Dryden
+ * Version: Java 17
+ * Date: 10/05/2023
+ * Description: KeyGeneration class that handles any key operations, such as shifting, separation, and permutations.
+ */
+
 import java.util.List;
-import java.util.Random;
 
 public class KeyGeneration {
 
-    private String keyString;
-    private String leftSide;
-    private String rightSide;
-    private int[][] permutationChoice1;
-    private int[][] permutationChoice2;
+    private String keyString; //String variable that holds the key obtained from the text file.
+    private String leftSide; //String variable that holds the left (C) portion of the key during rounds.
+    private String rightSide; //String variable that holds the right (D) portion of the key during rounds.
+    private int[][] permutationChoice1; //2D list variable used for the initial permutation used on the key.
+    private int[][] permutationChoice2; //2D list variable used for all permutations performed during rounds for the key.
 
     public KeyGeneration(String fileName) {
         keyString = "";
@@ -68,12 +75,8 @@ public class KeyGeneration {
         }
     }
 
-    public void endPermute() {
+    public void roundPermute() {
 
-    }
-
-    public String getKey() {
-        return keyString;
     }
 
     public String getLeftSide() {
@@ -84,24 +87,31 @@ public class KeyGeneration {
         return rightSide;
     }
 
-    //TO-DO
-    public void shiftKey() {
-        int shiftAmount;
+    public void shiftKey(int shiftAmount, boolean leftCheck) {
         String outputString = "";
-        Random random = new Random();
+        String loopString = "";
 
-        shiftAmount = random.nextInt(1,3);
-
-        for (int i=0; i<keyString.length(); i++) {
-            if (i-shiftAmount < 0) {
-                outputString += keyString.substring(keyString.length()+(i-shiftAmount), keyString.length()+((i+1)-shiftAmount));
-                continue;
-            }
-
-            outputString += keyString.substring(i-shiftAmount, (i+1)-shiftAmount);
+        if (leftCheck) {
+            loopString = leftSide;
         }
 
-        keyString = outputString;
+        else {
+            loopString = rightSide;
+        }
+
+        for (int i=0; i<loopString.length(); i++) {
+            int index = (i+shiftAmount) % 28;
+
+            outputString += loopString.substring(index, index+1);
+        }
+
+        if (leftCheck) {
+            leftSide = outputString;
+        }
+
+        else {
+            rightSide = outputString;
+        }
     }
 
 

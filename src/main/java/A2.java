@@ -7,11 +7,10 @@ public class A2
 {
     public static void main(String[] args)
     {
-        List<String> plaintext = new ArrayList<>();
-        List<List<List<Integer>>> sBoxes = generateSBoxes();
+        List<String> input = new ArrayList<>();
         try
         {
-            plaintext = Utility.readAllLines("src/resources/Plaintext.txt");
+            input = Utility.readAllLines("src/resources/Plaintext.txt");
         }
 
         catch (Exception e)
@@ -19,34 +18,39 @@ public class A2
             System.err.println("Error Occurred: " + e);
         }
 
-        for (int i=0; i<plaintext.size(); i++)
-        {
-            System.out.println(plaintext.get(i));
-        }
+        List<List<Integer>> avalancheResults = new ArrayList<>();
+        DES0 desOP = new DES0(input.get(0), input.get(2));
+        DES0 des0Q = new DES0(input.get(1), input.get(2));
+        desOP.encrypt();
+        des0Q.encrypt();
+        avalancheResults.add(avalanche(desOP.roundOutputs, des0Q.roundOutputs));
+
+      for(int i=0; i<16; i++)
+      {
+          System.out.print(i+" ");
+          for(int j=0; j<1; j++)
+          {
+              System.out.print(avalancheResults.get(j).get(i) +" ");
+          }
+          System.out.print("\n");
+      }
     }
 
-    private static List<List<List<Integer>>> generateSBoxes()
+    private static List<Integer> avalanche(List<String> roundOutputs, List<String> roundOutputs1)
     {
-        List<List<List<Integer>>> sBoxes = new ArrayList<>();
-        Random random = new Random();
-        for(int s = 0; s < 8; s++)
+        List<Integer> results = new ArrayList<>();
+        for( int i=0; i<roundOutputs.size(); i++)
         {
-            List<List<Integer>> sbox = new ArrayList<>();
-            for( int row = 0; row < 4; row++ )
+            int count=0;
+            for(int j=0; j<64; j++)
             {
-                List<Integer> rowInt = new ArrayList<>();
-                while( rowInt.size()<16 )
+                if( roundOutputs.get(i).charAt(j) != roundOutputs1.get(i).charAt(j))
                 {
-                    int randomInt = random.nextInt( 16 );
-                    if( !rowInt.contains( randomInt ) )
-                    {
-                        rowInt.add( randomInt );
-                    }
+                    count++;
                 }
-                sbox.add( rowInt );
             }
-            sBoxes.add( sbox );
+            results.add(count);
         }
-        return sBoxes;
+        return results;
     }
 }

@@ -6,7 +6,7 @@ public class KeyGeneration {
 
     public KeyGeneration(String fileName) {
         try {
-            keyString = Utility.readAllLines(fileName);
+            //keyString = Utility.readAllLines(fileName);
         }
 
         catch (Exception e) {

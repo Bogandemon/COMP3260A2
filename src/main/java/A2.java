@@ -11,7 +11,7 @@ public class A2
         List<String> input = new ArrayList<>();
         try
         {
-           input = Files.readAllLines(Path.of("src/resources/Plaintext.txt"));
+           input = Files.readAllLines(Path.of("input.txt"));
         }
         catch (Exception e)
         {

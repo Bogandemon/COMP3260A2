@@ -15,6 +15,7 @@ public class KeyGeneration {
     private final StringBuilder keyString; //StringBuilder that holds the key obtained from the text file and permuted from permutation choice 2.
     private StringBuilder leftSide; //StringBuilder that holds the left (C) portion of the key during rounds.
     private StringBuilder rightSide; //StringBuilder that holds the right (D) portion of the key during rounds.
+    private StringBuilder roundOutput; //StringBuilder that returns the round output to the encryption class.
     private int[][] permutationChoice1; //2D list variable used for the initial permutation used on the key.
     private int[][] permutationChoice2; //2D list variable used for all permutations performed during rounds for the key.
 
@@ -90,14 +91,15 @@ public class KeyGeneration {
 
     //Method for performing a round permutation with table 2.
     private void roundPermute() {
+        roundOutput = new StringBuilder();
         StringBuilder tempCombine = leftSide.append(rightSide);
         int keyCharacter;
 
         for (int[] ints : permutationChoice2) {
-            for (int m = 0; m < 7; m++) {
+            for (int m = 0; m < 8; m++) {
                 keyCharacter = ints[m];
 
-                keyString.append(tempCombine.charAt(keyCharacter - 1));
+                roundOutput.append(tempCombine.charAt(keyCharacter - 1));
             }
         }
 
@@ -140,5 +142,9 @@ public class KeyGeneration {
 
     public StringBuilder getRightSide() {
         return rightSide;
+    }
+
+    public StringBuilder getRoundOutput() {
+        return roundOutput;
     }
 }

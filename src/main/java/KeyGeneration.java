@@ -2,7 +2,7 @@
  * Classname: KenGeneration
  * Programmer: Kyle Dryden
  * Version: Java 17
- * Date: 10/05/2023
+ * Date: 20/05/2023
  * Description: KeyGeneration class that handles any key operations, such as shifting, separation, and permutations.
  */
 
@@ -12,21 +12,22 @@ import java.util.List;
 
 public class KeyGeneration {
 
-    private String keyString; //String variable that holds the key obtained from the text file and permutation from permutated choice 2.
-    private String leftSide; //String variable that holds the left (C) portion of the key during rounds.
-    private String rightSide; //String variable that holds the right (D) portion of the key during rounds.
+    private final StringBuilder keyString; //StringBuilder that holds the key obtained from the text file and permutation from permutated choice 2.
+    private StringBuilder leftSide; //StringBuilder that holds the left (C) portion of the key during rounds.
+    private StringBuilder rightSide; //StringBuilder that holds the right (D) portion of the key during rounds.
     private int[][] permutationChoice1; //2D list variable used for the initial permutation used on the key.
     private int[][] permutationChoice2; //2D list variable used for all permutations performed during rounds for the key.
 
     public KeyGeneration() {
-        keyString = "";
-        leftSide = "";
-        rightSide = "";
+
+        keyString = new StringBuilder();
+        leftSide = new StringBuilder();
+        rightSide = new StringBuilder();
 
         try {
             List<String> convertString = Files.readAllLines(Path.of("src/resources/Key.txt"));
 
-            for (String s : convertString) keyString += s;
+            for (String s : convertString) keyString.append(s);
         }
 
         catch (Exception e) {
@@ -57,8 +58,8 @@ public class KeyGeneration {
     }
 
     public void keyUpdate(int shiftAmount) {
-        shiftKey(shiftAmount, true);
         shiftKey(shiftAmount, false);
+        shiftKey(shiftAmount, true);
         roundPermute();
     }
 
@@ -68,7 +69,7 @@ public class KeyGeneration {
             for (int m=0; m<permutationChoice1.length-1; m++) {
                 keyCharacter = permutationChoice1[i][m];
 
-                leftSide += keyString.substring(keyCharacter-1, keyCharacter);
+                leftSide.append(keyString.substring(keyCharacter-1, keyCharacter));
             }
         }
 
@@ -76,29 +77,27 @@ public class KeyGeneration {
             for (int m=0; m<permutationChoice1.length-1; m++) {
                 keyCharacter = permutationChoice1[i+(permutationChoice1.length/2)][m];
 
-                rightSide += keyString.substring(keyCharacter-1, keyCharacter);
+                rightSide.append(keyString.substring(keyCharacter-1, keyCharacter));
             }
         }
     }
 
     private void roundPermute() {
-        String tempCombine = leftSide + rightSide;
+        StringBuilder tempCombine = leftSide.append(rightSide);
         int keyCharacter;
-
-        keyString = "";
 
         for (int[] ints : permutationChoice2) {
             for (int m = 0; m < 7; m++) {
                 keyCharacter = ints[m];
 
-                keyString += tempCombine.substring(keyCharacter - 1, keyCharacter);
+                keyString.append(tempCombine.charAt(keyCharacter - 1));
             }
         }
     }
 
     private void shiftKey(int shiftAmount, boolean leftCheck) {
         StringBuilder outputString = new StringBuilder();
-        String loopString;
+        StringBuilder loopString;
 
         if (leftCheck) {
             loopString = leftSide;
@@ -115,23 +114,19 @@ public class KeyGeneration {
         }
 
         if (leftCheck) {
-            leftSide = outputString.toString();
+            leftSide = outputString;
         }
 
         else {
-            rightSide = outputString.toString();
+            rightSide = outputString;
         }
     }
 
-    public String getKeyString() {
-        return keyString;
-    }
-
-    public String getLeftSide() {
+    public StringBuilder getLeftSide() {
         return leftSide;
     }
 
-    public String getRightSide() {
+    public StringBuilder getRightSide() {
         return rightSide;
     }
 }

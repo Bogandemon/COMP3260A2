@@ -15,7 +15,16 @@ public class DES2 extends  DESBase
             String originalLeft = left;
             left = right;
             String expandedRight = permute( right, E );
-           // expandedRight = xor( expandedRight, key );
+
+            if  (i == 0 || i == 1 || i == 8 || i == 15) {
+                key.keyUpdate(1);
+            }
+
+            else {
+                key.keyUpdate(2);
+            }
+
+            expandedRight = xor( expandedRight, key.getRoundOutput() );
             expandedRight = permute( expandedRight, IEP );
             expandedRight = permute( expandedRight, P );
             right = xor(originalLeft, expandedRight);

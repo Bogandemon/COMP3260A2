@@ -15,7 +15,16 @@ public class DES3 extends DESBase
             String originalLeft = left;
             left = right;
             String expandedRight = permute( right, E );
-           // expandedRight = xor( expandedRight, key );
+
+            if  (i == 0 || i == 1 || i == 8 || i == 15) {
+                key.keyUpdate(1);
+            }
+
+            else {
+                key.keyUpdate(2);
+            }
+
+            expandedRight = xor( expandedRight, key.getRoundOutput() );
             expandedRight = sBoxSubstitution( expandedRight );
             right = xor(originalLeft, expandedRight);
             roundOutputs.add( left + right );

@@ -6,12 +6,12 @@ public abstract class DESBase
 {
     protected List<String> roundOutputs;
     protected String plainText;
-    protected String key;
+    protected KeyGeneration key;
 
     public DESBase( String plainText, String key )
     {
         this.plainText=plainText;
-        this.key=key;
+        this.key = new KeyGeneration(key);
         roundOutputs = new ArrayList<>();
     }
 

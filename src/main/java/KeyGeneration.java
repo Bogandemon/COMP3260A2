@@ -6,10 +6,6 @@
  * Description: KeyGeneration class that handles any key operations, such as shifting, separation, and permutations.
  */
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-
 public class KeyGeneration {
 
     private final StringBuilder keyString; //StringBuilder that holds the key obtained from the text file and permuted from permutation choice 2.
@@ -19,21 +15,13 @@ public class KeyGeneration {
     private int[][] permutationChoice1; //2D list variable used for the initial permutation used on the key.
     private int[][] permutationChoice2; //2D list variable used for all permutations performed during rounds for the key.
 
-    public KeyGeneration() {
+    public KeyGeneration(String defaultKey) {
 
         keyString = new StringBuilder();
         leftSide = new StringBuilder();
         rightSide = new StringBuilder();
 
-        try {
-            List<String> convertString = Files.readAllLines(Path.of("src/resources/Key.txt"));
-
-            for (String s : convertString) keyString.append(s);
-        }
-
-        catch (Exception e) {
-            System.err.println("Error Occurred: " + e);
-        }
+        keyString.append(defaultKey);
 
         init();
     }
@@ -135,16 +123,6 @@ public class KeyGeneration {
         }
     }
 
-    //Public getters.
-    public StringBuilder getLeftSide() {
-        return leftSide;
-    }
-
-    public StringBuilder getRightSide() {
-        return rightSide;
-    }
-
-    public StringBuilder getRoundOutput() {
-        return roundOutput;
-    }
+    //Public getter.
+    public String getRoundOutput() { return roundOutput.toString(); }
 }

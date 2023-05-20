@@ -22,7 +22,7 @@ public class A2
         key.keyUpdate(1);
 
         System.out.println(key.getLeftSide());
-        //System.out.println(key.getRightSide());
+        System.out.println(key.getRightSide());
         
         List<List<Integer>> avalancheResults = new ArrayList<>();
         DES0 des0P = new DES0(input.get(0), input.get(2));

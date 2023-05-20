@@ -12,7 +12,7 @@ import java.util.List;
 
 public class KeyGeneration {
 
-    private final StringBuilder keyString; //StringBuilder that holds the key obtained from the text file and permutation from permutated choice 2.
+    private final StringBuilder keyString; //StringBuilder that holds the key obtained from the text file and permuted from permutation choice 2.
     private StringBuilder leftSide; //StringBuilder that holds the left (C) portion of the key during rounds.
     private StringBuilder rightSide; //StringBuilder that holds the right (D) portion of the key during rounds.
     private int[][] permutationChoice1; //2D list variable used for the initial permutation used on the key.
@@ -37,6 +37,7 @@ public class KeyGeneration {
         init();
     }
 
+    //Initialisation method that creates the permutation tables and splits the keys into two equal components.
     private void init() {
         permutationChoice1 = new int[][]{{57, 49, 41, 33, 25, 17, 9},
                                         {1, 58, 50, 42, 34, 26, 18},
@@ -57,14 +58,18 @@ public class KeyGeneration {
         keySeparation();
     }
 
+    //Public method used to shift both key segments and perform a round permutation.
     public void keyUpdate(int shiftAmount) {
         shiftKey(shiftAmount, false);
         shiftKey(shiftAmount, true);
         roundPermute();
     }
 
+    //Method that separates the 64-bit key into two equal segments of 28 bits (8 bits are used for parity checking).
     private void keySeparation() {
         int keyCharacter;
+
+        //First double for-loop for the left side/first four rows of the permutation table.
         for (int i=0; i<permutationChoice1.length/2; i++) {
             for (int m=0; m<permutationChoice1.length-1; m++) {
                 keyCharacter = permutationChoice1[i][m];
@@ -73,6 +78,7 @@ public class KeyGeneration {
             }
         }
 
+        //Second double for-loop for the right side/last four rows of the permutation table.
         for (int i=0; i<permutationChoice1.length/2; i++) {
             for (int m=0; m<permutationChoice1.length-1; m++) {
                 keyCharacter = permutationChoice1[i+(permutationChoice1.length/2)][m];
@@ -82,6 +88,7 @@ public class KeyGeneration {
         }
     }
 
+    //Method for performing a round permutation with table 2.
     private void roundPermute() {
         StringBuilder tempCombine = leftSide.append(rightSide);
         int keyCharacter;
@@ -93,8 +100,11 @@ public class KeyGeneration {
                 keyString.append(tempCombine.charAt(keyCharacter - 1));
             }
         }
+
+        leftSide.delete(28, 56); //Used to remove from the StringBuilder when appending for tempCombine.
     }
 
+    //Method used for shifting the key to the left. shiftAmount will only take one or two as its values.
     private void shiftKey(int shiftAmount, boolean leftCheck) {
         StringBuilder outputString = new StringBuilder();
         StringBuilder loopString;
@@ -107,6 +117,7 @@ public class KeyGeneration {
             loopString = rightSide;
         }
 
+        //For loop that evaluates where each value will be placed in the output.
         for (int i = 0; i < loopString.length(); i++) {
             int index = (i + shiftAmount) % 28;
 
@@ -122,6 +133,7 @@ public class KeyGeneration {
         }
     }
 
+    //Public getters.
     public StringBuilder getLeftSide() {
         return leftSide;
     }

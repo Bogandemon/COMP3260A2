@@ -108,19 +108,19 @@ public class A2
         }
 
         try {
-            decryptInput = Files.readAllLines(Path.of("EncryptionInput.txt"));
+            decryptInput = Files.readAllLines(Path.of("decryptionInput.txt"));
         }
 
         catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        try( PrintWriter writer = new PrintWriter("decryption.txt") )
+        try ( PrintWriter writer = new PrintWriter("decryption.txt") )
         {
             writer.println("DECRYPTION");
-            writer.println("Ciphertext C: ");
-            writer.println("Key K: ");
-            writer.println("Plaintext P: ");
+            writer.println("Ciphertext C: " + decryptInput.get(0));
+            writer.println("Key K: " + decryptInput.get(1));
+            writer.println("Plaintext P: " + des0P.plainText);
         }
         catch ( Exception e )
         {

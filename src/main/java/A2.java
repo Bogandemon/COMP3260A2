@@ -162,7 +162,7 @@ public class A2
         }
     }
 
-
+    //Method used to evaluate how many values are changed between two texts. These are then outputted later
     private static List<Integer> avalanche(List<String> roundOutputs, List<String> roundOutputs1)
     {
         List<Integer> results = new ArrayList<>();
@@ -181,6 +181,7 @@ public class A2
         return results;
     }
 
+    //Method used for outputting the values found in the avalanche method between the two texts
     private static void outPutAvalanche( List<List<Integer>> avalancheResults, PrintWriter writer )
     {
         for(int i=0; i<17; i++)

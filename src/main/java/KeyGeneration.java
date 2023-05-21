@@ -1,8 +1,8 @@
 /*
- * Classname: KenGeneration
+ * Classname: KeyGeneration
  * Programmer: Kyle Dryden
  * Version: Java 17
- * Date: 20/05/2023
+ * Date: 21/05/2023
  * Description: KeyGeneration class that handles any key operations, such as shifting, separation, and permutations.
  */
 

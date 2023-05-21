@@ -48,7 +48,18 @@ public class KeyGeneration {
     }
 
     //Public method used to shift both key segments and perform a round permutation.
-    public void keyUpdate(int shiftAmount) {
+    public void keyUpdate( int round )
+    {
+        int shiftAmount;
+        if  (round == 0 || round == 1 || round == 8 || round == 15)
+        {
+            shiftAmount = 1;
+        }
+
+        else
+        {
+            shiftAmount = 2;
+        }
         shiftKey(shiftAmount, false);
         shiftKey(shiftAmount, true);
         roundPermute();

@@ -11,7 +11,7 @@ public class A2
         List<String> input = new ArrayList<>();
         try
         {
-           input = Files.readAllLines(Path.of("input.txt"));
+           input = Files.readAllLines(Path.of("encryptionInput.txt"));
         }
         catch (Exception e)
         {
@@ -78,16 +78,35 @@ public class A2
             writer.println( "Total running time: " + input.get(2) + "(second)" );
 
             writer.println("\nP and P’ under K");
-            writer.println( "Ciphertext C: " + des0P.roundOutputs.get(16) );
-            writer.println( "Ciphertext C’: " + des0Q.roundOutputs.get(16) );
-            writer.println("Round     " + "DES0    " + "DES1    " + "DES2    " + "DES3    ");
+            writer.println( "Ciphertext C DES0: " + des0P.roundOutputs.get(16) );
+            writer.println( "Ciphertext C’ DES0: " + des0Q.roundOutputs.get(16) );
+            writer.println( "Ciphertext C DES1: " + des1P.roundOutputs.get(16) );
+            writer.println( "Ciphertext C’ DES1: " + des1Q.roundOutputs.get(16) );
+            writer.println( "Ciphertext C DES2: " + des2P.roundOutputs.get(16) );
+            writer.println( "Ciphertext C’ DES2: " + des2Q.roundOutputs.get(16) );
+            writer.println( "Ciphertext C DES3: " + des2P.roundOutputs.get(16) );
+            writer.println( "Ciphertext C’ DES3: " + des2Q.roundOutputs.get(16) );
             outPutAvalanche( avalancheResults, writer );
 
             writer.println("\nP under K and K’");
-            writer.println( "Ciphertext C: " + des0K.roundOutputs.get(16) );
-            writer.println( "Ciphertext C’: " + des0L.roundOutputs.get(16) );
-            writer.println("Round     " + "DES0    " + "DES1    " + "DES2    " + "DES3    ");
+            writer.println( "Ciphertext C DES0: " + des0K.roundOutputs.get(16) );
+            writer.println( "Ciphertext C’ DES0: " + des0L.roundOutputs.get(16) );
+            writer.println( "Ciphertext C DES1: " + des1K.roundOutputs.get(16) );
+            writer.println( "Ciphertext C’ DES1: " + des1L.roundOutputs.get(16) );
+            writer.println( "Ciphertext C DES2: " + des2K.roundOutputs.get(16) );
+            writer.println( "Ciphertext C’ DES2: " + des2L.roundOutputs.get(16) );
+            writer.println( "Ciphertext C DES3: " + des2K.roundOutputs.get(16) );
+            writer.println( "Ciphertext C’ DES3: " + des2L.roundOutputs.get(16) );
             outPutAvalanche( avalancheResults2, writer );
+        }
+        catch ( Exception e )
+        {
+            throw new RuntimeException(e);
+        }
+
+        try( PrintWriter writer = new PrintWriter("decryption.txt") )
+        {
+
         }
         catch ( Exception e )
         {
@@ -118,16 +137,10 @@ public class A2
     {
         for(int i=0; i<17; i++)
         {
-
-            if (i<10) { writer.print(i+"         "); }
-
-            else { writer.print(i+"        "); }
-
+            writer.print(i+" ");
             for(int j=0; j<4; j++)
             {
-                String result = String.valueOf(avalancheResults.get(j).get(i));
-                String padding = String.format("%-8s", result);
-                writer.print(padding);
+                writer.print(avalancheResults.get(j).get(i) +" ");
             }
             writer.print("\n");
         }

@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
 public abstract class DESBase
 {
     protected List<String> roundOutputs;
@@ -10,7 +9,7 @@ public abstract class DESBase
 
     public DESBase( String plainText, String key )
     {
-        this.plainText=plainText;
+        this.plainText = plainText;
         this.key = new KeyGeneration(key);
         roundOutputs = new ArrayList<>();
     }
@@ -111,6 +110,7 @@ public abstract class DESBase
         19, 13, 30, 6, 22, 11, 4, 25
     };
 
+    //final permutation table
     protected static final int[] FP =
     {
         40, 8, 48, 16, 56, 24, 64, 32,
@@ -130,17 +130,19 @@ public abstract class DESBase
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < permutationTable.length; i++)
         {
+            //
             output.append(input.charAt(permutationTable[i] - 1));
         }
         return output.toString();
     }
 
-    protected String xor( final String text, final String roundKey )
+    protected String xor(String text, String text2 )
     {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < text.length(); i++)
         {
-            output.append(text.charAt(i) ^ roundKey.charAt(i));
+            //xor operation for each element of the two strings
+            output.append(text.charAt(i) ^ text2.charAt(i));
         }
         return output.toString();
     }
@@ -150,9 +152,13 @@ public abstract class DESBase
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < 8; i++)
         {
+            //gets each 6 letter string from input
             String chunk = input.substring(i * 6, (i + 1) * 6);
+            //gets row index from the first and last element of the chunk
             int row = Integer.parseInt(chunk.charAt(0) + "" + chunk.charAt(5), 2);
+            //gets column index from the 4 in between elements of the chunk
             int column = Integer.parseInt(chunk.substring(1, 5), 2);
+
             String bin = Integer.toBinaryString(sbox[i][row][column]);
             while (bin.length() < 4)
             {

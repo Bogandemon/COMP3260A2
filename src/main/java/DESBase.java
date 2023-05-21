@@ -5,15 +5,13 @@ public abstract class DESBase
 {
     protected List<String> roundOutputs;
     protected String plainText;
-    protected KeyGeneration key;
-    protected List<String> decryptKeys;
+    protected List<String> roundKeys;
 
     public DESBase( String plainText, String key )
     {
         this.plainText = plainText;
-        this.key = new KeyGeneration(key);
+        getRoundKeys(key);
         roundOutputs = new ArrayList<>();
-        decryptKeys = new ArrayList<>();
     }
 
     // initial permutation table
@@ -126,7 +124,14 @@ public abstract class DESBase
     };
 
     public abstract void encrypt();
-    public abstract void decrypt();
+    public abstract String decrypt();
+
+
+    private void getRoundKeys( String key )
+    {
+        KeyGeneration kg = new KeyGeneration(key);
+        roundKeys = kg.getRoundKeys();
+    }
 
     protected String permute(String input, int[] permutationTable)
     {

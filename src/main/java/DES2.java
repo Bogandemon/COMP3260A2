@@ -15,9 +15,7 @@ public class DES2 extends  DESBase
             String originalLeft = left;
             left = right;
             String expandedRight = permute( right, E );
-            key.keyUpdate(i);
-            decryptKeys.add(key.getRoundOutput());
-            expandedRight = xor( expandedRight, key.getRoundOutput() );
+            expandedRight = xor( expandedRight, roundKeys.get(i) );
             expandedRight = permute( expandedRight, IEP );
             expandedRight = permute( expandedRight, P );
             right = xor(originalLeft, expandedRight);
@@ -27,7 +25,22 @@ public class DES2 extends  DESBase
         roundOutputs.add( permute( output, FP ) );
     }
 
-    public void decrypt() {
-
+    public String decrypt()
+    {
+        String output = permute(plainText, IP);
+        String left = output.substring(0, output.length()/2);
+        String right = output.substring(output.length()/2);
+        for (int i=0; i<16; i++)
+        {
+            String originalLeft = left;
+            left = right;
+            String expandedRight = permute( right, E );
+            expandedRight = xor( expandedRight, roundKeys.get(15-i));
+            expandedRight = permute( expandedRight, IEP );
+            expandedRight = permute( expandedRight, P );
+            right = xor(originalLeft, expandedRight);
+        }
+        output = right + left;
+        return permute( output, FP ) ;
     }
 }

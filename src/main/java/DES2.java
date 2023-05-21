@@ -16,6 +16,7 @@ public class DES2 extends  DESBase
             left = right;
             String expandedRight = permute( right, E );
             key.keyUpdate(i);
+            decryptKeys.add(key.getRoundOutput());
             expandedRight = xor( expandedRight, key.getRoundOutput() );
             expandedRight = permute( expandedRight, IEP );
             expandedRight = permute( expandedRight, P );

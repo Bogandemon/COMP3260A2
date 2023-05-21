@@ -6,12 +6,14 @@ public abstract class DESBase
     protected List<String> roundOutputs;
     protected String plainText;
     protected KeyGeneration key;
+    protected List<String> decryptKeys;
 
     public DESBase( String plainText, String key )
     {
         this.plainText = plainText;
         this.key = new KeyGeneration(key);
         roundOutputs = new ArrayList<>();
+        decryptKeys = new ArrayList<>();
     }
 
     // initial permutation table

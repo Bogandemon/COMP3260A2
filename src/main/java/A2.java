@@ -9,9 +9,11 @@ public class A2
     public static void main(String[] args)
     {
         List<String> input = new ArrayList<>();
+        List<String> decryptInput = new ArrayList<>();
         try
         {
            input = Files.readAllLines(Path.of("encryptionInput.txt"));
+           decryptInput = Files.readAllLines(Path.of("EncryptionInput.txt"));
         }
         catch (Exception e)
         {

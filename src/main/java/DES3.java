@@ -7,7 +7,7 @@ public class DES3 extends DESBase
 
     public void encrypt()
     {
-        String output = permute(plainText, IP);
+        String output = permute(text, IP);
         String left = output.substring(0, (output.length()/2));
         String right = output.substring((output.length()/2));
         for(int i = 0; i < 16; i++)
@@ -26,7 +26,7 @@ public class DES3 extends DESBase
 
     public String decrypt()
     {
-        String output = permute(plainText, IP);
+        String output = permute(text, IP);
         String left = output.substring(0, output.length()/2);
         String right = output.substring(output.length()/2);
         for (int i=0; i<16; i++)

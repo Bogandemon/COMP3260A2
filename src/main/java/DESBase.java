@@ -7,9 +7,9 @@ public abstract class DESBase
     protected String text;
     protected List<String> roundKeys;
 
-    public DESBase( String plainText, String key )
+    public DESBase( String text, String key )
     {
-        this.plainText = plainText;
+        this.text = text;
         getRoundKeys(key);
         roundOutputs = new ArrayList<>();
     }

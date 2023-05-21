@@ -8,19 +8,24 @@ public class A2
 {
     public static void main(String[] args)
     {
+
+        //Variables that hold the input given from the text files.
         List<String> input = new ArrayList<>();
         List<String> decryptInput = new ArrayList<>();
+
         try
         {
-           input = Files.readAllLines(Path.of("encryptionInput.txt"));
+            input = Files.readAllLines(Path.of("encryptionInput.txt"));
         }
         catch (Exception e)
         {
-           e.printStackTrace();
+            e.printStackTrace();
         }
 
-        List<List<Integer>> avalancheResults = new ArrayList<>();
-        long startTime = System.nanoTime();
+        List<List<Integer>> avalancheResults = new ArrayList<>(); //Variable that keeps track of all integer values used for the report output.
+        long startTime = System.nanoTime(); //Variable that tracks how long the system takes to encrypt.
+
+        //Bank of DES variables used for the first set(two Plaintexts with one Key).
         DES0 des0P = new DES0(input.get(0), input.get(2));
         DES0 des0Q = new DES0(input.get(1), input.get(2));
         des0P.encrypt();
@@ -44,7 +49,8 @@ public class A2
         des3P.encrypt();
         des3Q.encrypt();
         avalancheResults.add(avalanche(des3P.roundOutputs, des3Q.roundOutputs));
-        
+
+        //Second bank of DES variables used for output (one Plaintext, two Keys).
         List<List<Integer>> avalancheResults2 = new ArrayList<>();
         DES0 des0K = new DES0(input.get(0), input.get(2));
         DES0 des0L = new DES0(input.get(0), input.get(3));
@@ -69,8 +75,12 @@ public class A2
         des3K.encrypt();
         des3L.encrypt();
         avalancheResults2.add(avalanche(des3K.roundOutputs, des3L.roundOutputs));
+
+        //Used to calculate how long the calculations took
         long endTime = System.nanoTime();
         double time = (double) (endTime - startTime) /1000000000;
+
+        //Try statement for creating the output for the avalancheReport file
         try( PrintWriter writer = new PrintWriter("avalancheReport.txt") )
         {
             writer.println( "Avalanche Demonstration" );
@@ -80,6 +90,7 @@ public class A2
             writer.println( "Key K’: " + input.get(2) );
             writer.println( "Total running time: " + time + " seconds" );
 
+            //Output statements used for the first set of DES tests.
             writer.println("\nP and P’ under K");
             writer.println( "Ciphertext C DES0: " + des0P.roundOutputs.get(16) );
             writer.println( "Ciphertext C’ DES0: " + des0Q.roundOutputs.get(16) );
@@ -92,6 +103,7 @@ public class A2
             writer.println("\nRound    " + "DES0    " + "DES1    " + "DES2    " + "DES3    ");
             outPutAvalanche( avalancheResults, writer );
 
+            //Output statements used for the second set of DES tests.
             writer.println("\nP under K and K’");
             writer.println( "Ciphertext C DES0: " + des0K.roundOutputs.get(16) );
             writer.println( "Ciphertext C’ DES0: " + des0L.roundOutputs.get(16) );
@@ -109,6 +121,7 @@ public class A2
             throw new RuntimeException(e);
         }
 
+        //Decryption related material
         try {
             decryptInput = Files.readAllLines(Path.of("decryptionInput.txt"));
         }
@@ -117,11 +130,13 @@ public class A2
             throw new RuntimeException(e);
         }
 
+        //Bank of new DES variables used for decryption
         DES0 des0C = new DES0(decryptInput.get(0),decryptInput.get(1));
         DES1 des1C = new DES1(decryptInput.get(0),decryptInput.get(1));
         DES2 des2C = new DES2(decryptInput.get(0),decryptInput.get(1));
         DES3 des3C = new DES3(decryptInput.get(0),decryptInput.get(1));
 
+        //Used to create the output to send to the output text file
         try ( PrintWriter writer = new PrintWriter("decryption.txt") )
         {
             writer.println("DECRYPTION");

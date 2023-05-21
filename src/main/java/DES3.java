@@ -25,4 +25,8 @@ public class DES3 extends DESBase
         output = right + left;
         roundOutputs.add( permute( output, FP ) );
     }
+
+    public void decrypt() {
+
+    }
 }

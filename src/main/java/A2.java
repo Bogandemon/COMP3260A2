@@ -13,7 +13,6 @@ public class A2
         try
         {
            input = Files.readAllLines(Path.of("encryptionInput.txt"));
-           decryptInput = Files.readAllLines(Path.of("EncryptionInput.txt"));
         }
         catch (Exception e)
         {
@@ -86,8 +85,8 @@ public class A2
             writer.println( "Ciphertext C’ DES1: " + des1Q.roundOutputs.get(16) );
             writer.println( "Ciphertext C DES2: " + des2P.roundOutputs.get(16) );
             writer.println( "Ciphertext C’ DES2: " + des2Q.roundOutputs.get(16) );
-            writer.println( "Ciphertext C DES3: " + des2P.roundOutputs.get(16) );
-            writer.println( "Ciphertext C’ DES3: " + des2Q.roundOutputs.get(16) );
+            writer.println( "Ciphertext C DES3: " + des3P.roundOutputs.get(16) );
+            writer.println( "Ciphertext C’ DES3: " + des3Q.roundOutputs.get(16) );
             writer.println("Round    " + "DES0    " + "DES1    " + "DES2    " + "DES3    ");
             outPutAvalanche( avalancheResults, writer );
 
@@ -98,8 +97,8 @@ public class A2
             writer.println( "Ciphertext C’ DES1: " + des1L.roundOutputs.get(16) );
             writer.println( "Ciphertext C DES2: " + des2K.roundOutputs.get(16) );
             writer.println( "Ciphertext C’ DES2: " + des2L.roundOutputs.get(16) );
-            writer.println( "Ciphertext C DES3: " + des2K.roundOutputs.get(16) );
-            writer.println( "Ciphertext C’ DES3: " + des2L.roundOutputs.get(16) );
+            writer.println( "Ciphertext C DES3: " + des3K.roundOutputs.get(16) );
+            writer.println( "Ciphertext C’ DES3: " + des3L.roundOutputs.get(16) );
             writer.println("Round    " + "DES0    " + "DES1    " + "DES2    " + "DES3    ");
             outPutAvalanche( avalancheResults2, writer );
         }
@@ -108,9 +107,20 @@ public class A2
             throw new RuntimeException(e);
         }
 
+        try {
+            decryptInput = Files.readAllLines(Path.of("EncryptionInput.txt"));
+        }
+
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         try( PrintWriter writer = new PrintWriter("decryption.txt") )
         {
-
+            writer.println("DECRYPTION");
+            writer.println("Ciphertext C: ");
+            writer.println("Key K: ");
+            writer.println("Plaintext P: ");
         }
         catch ( Exception e )
         {

@@ -126,6 +126,7 @@ public abstract class DESBase
     };
 
     public abstract void encrypt();
+    public abstract void decrypt();
 
     protected String permute(String input, int[] permutationTable)
     {

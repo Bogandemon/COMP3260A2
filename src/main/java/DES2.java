@@ -1,3 +1,11 @@
+/*
+ * Classname: DES2
+ * Programmer: Joshua O'Brien
+ * Version: Java 17
+ * Date: 21/05/2023
+ * Description: DES2 handles the third iteration of the DES simulation. This version is missing S-box functionality.
+ */
+
 public class DES2 extends  DESBase
 {
     public DES2(String plainText, String key)

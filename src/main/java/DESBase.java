@@ -1,3 +1,11 @@
+/*
+ * Classname: DESBase
+ * Programmer: Joshua O'Brien
+ * Version: Java 17
+ * Date: 21/05/2023
+ * Description: DESBase class that gives all extended DES classes their functionality and local variables.
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,7 +133,6 @@ public abstract class DESBase
 
     public abstract void encrypt();
     public abstract String decrypt();
-
 
     private void getRoundKeys( String key )
     {

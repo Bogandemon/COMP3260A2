@@ -1,3 +1,11 @@
+/*
+ * Classname: DES1
+ * Programmer: Joshua O'Brien
+ * Version: Java 17
+ * Date: 21/05/2023
+ * Description: DES1 handles the second iteration of the DES simulation. This version is missing the round key XOR component from all functions.
+ */
+
 public class DES1 extends DESBase
 {
     public DES1(String plainText, String key)

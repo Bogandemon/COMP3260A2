@@ -1,5 +1,11 @@
-import java.util.ArrayList;
-import java.util.List;
+/*
+ * Classname: DES0
+ * Programmer: Joshua O'Brien
+ * Version: Java 17
+ * Date: 21/05/2023
+ * Description: DES0 handles the first iteration of the DES simulation. This version has all components.
+ */
+
 public class DES0 extends DESBase
 {
     public DES0(String plainText, String key)

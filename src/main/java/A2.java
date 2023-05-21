@@ -1,3 +1,11 @@
+/*
+ * Classname: A2
+ * Programmer/s: Kyle Dryden, Joshua O'Brien
+ * Version: Java 17
+ * Date: 21/05/2023
+ * Description: A2 class that handles the interaction between the DES versions, the key/s, the input files, and the output files.
+ */
+
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;

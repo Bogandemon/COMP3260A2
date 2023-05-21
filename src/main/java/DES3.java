@@ -1,3 +1,11 @@
+/*
+ * Classname: DES3
+ * Programmer: Joshua O'Brien
+ * Version: Java 17
+ * Date: 21/05/2023
+ * Description: DES3 handles the fourth iteration of the DES simulation. This version is missing permutation P from all rounds.
+ */
+
 public class DES3 extends DESBase
 {
     public DES3(String plainText, String key)

@@ -15,15 +15,7 @@ public class DES0 extends DESBase
             String originalLeft = left;
             left = right;
             String expandedRight = permute( right, E );
-
-            if  (i == 0 || i == 1 || i == 8 || i == 15) {
-                key.keyUpdate(1);
-            }
-
-            else {
-                key.keyUpdate(2);
-            }
-
+            key.keyUpdate(i);
             expandedRight = xor( expandedRight, key.getRoundOutput());
             expandedRight = sBoxSubstitution( expandedRight );
             expandedRight = permute( expandedRight, P );

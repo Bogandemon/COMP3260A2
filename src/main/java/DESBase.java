@@ -1,8 +1,8 @@
 /*
  * Classname: DESBase
- * Programmer: Joshua O'Brien
+ * Programmer: Josh O'Brien
  * Version: Java 17
- * Date: 21/05/2023
+ * Date: 16/05/2023
  * Description: DESBase class that gives all extended DES classes their functionality and local variables.
  */
 

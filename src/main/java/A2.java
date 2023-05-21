@@ -1,6 +1,6 @@
 /*
  * Classname: A2
- * Programmer/s: Kyle Dryden, Joshua O'Brien
+ * Programmer/s: Kyle Dryden, Josh O'Brien
  * Version: Java 17
  * Date: 21/05/2023
  * Description: A2 class that handles the interaction between the DES versions, the key/s, the input files, and the output files.
@@ -24,6 +24,7 @@ public class A2
         try
         {
             input = Files.readAllLines(Path.of("encryptionInput.txt"));
+            decryptInput  = Files.readAllLines(Path.of("decryptionInput.txt"));
         }
         catch (Exception e)
         {
@@ -126,15 +127,6 @@ public class A2
         }
         catch ( Exception e )
         {
-            throw new RuntimeException(e);
-        }
-
-        //Decryption related material
-        try {
-            decryptInput = Files.readAllLines(Path.of("decryptionInput.txt"));
-        }
-
-        catch (Exception e) {
             throw new RuntimeException(e);
         }
 

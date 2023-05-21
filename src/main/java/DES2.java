@@ -1,8 +1,8 @@
 /*
  * Classname: DES2
- * Programmer: Joshua O'Brien
+ * Programmer: Josh O'Brien
  * Version: Java 17
- * Date: 21/05/2023
+ * Date: 16/05/2023
  * Description: DES2 handles the third iteration of the DES simulation. This version is missing S-box functionality.
  */
 
@@ -15,6 +15,7 @@ public class DES2 extends  DESBase
 
     public void encrypt()
     {
+        //same process as des0 except s-box permutation is replaced with the inverse expansion table
         String output = permute(text, IP);
         String left = output.substring(0, (output.length()/2));
         String right = output.substring((output.length()/2));
@@ -35,6 +36,7 @@ public class DES2 extends  DESBase
 
     public String decrypt()
     {
+        //same process as encryption but with round keys reversed
         String output = permute(text, IP);
         String left = output.substring(0, output.length()/2);
         String right = output.substring(output.length()/2);

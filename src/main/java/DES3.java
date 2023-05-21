@@ -1,8 +1,8 @@
 /*
  * Classname: DES3
- * Programmer: Joshua O'Brien
+ * Programmer: Josh O'Brien
  * Version: Java 17
- * Date: 21/05/2023
+ * Date: 16/05/2023
  * Description: DES3 handles the fourth iteration of the DES simulation. This version is missing permutation P from all rounds.
  */
 
@@ -15,6 +15,7 @@ public class DES3 extends DESBase
 
     public void encrypt()
     {
+        //same process as des0 except straight permutation is removed
         String output = permute(text, IP);
         String left = output.substring(0, (output.length()/2));
         String right = output.substring((output.length()/2));
@@ -34,6 +35,7 @@ public class DES3 extends DESBase
 
     public String decrypt()
     {
+        //same process as encryption but with round keys reversed
         String output = permute(text, IP);
         String left = output.substring(0, output.length()/2);
         String right = output.substring(output.length()/2);

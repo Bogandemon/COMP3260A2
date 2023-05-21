@@ -86,6 +86,7 @@ public class A2
             writer.println( "Ciphertext C’ DES2: " + des2Q.roundOutputs.get(16) );
             writer.println( "Ciphertext C DES3: " + des2P.roundOutputs.get(16) );
             writer.println( "Ciphertext C’ DES3: " + des2Q.roundOutputs.get(16) );
+            writer.println("Round    " + "DES0    " + "DES1    " + "DES2    " + "DES3    ");
             outPutAvalanche( avalancheResults, writer );
 
             writer.println("\nP under K and K’");
@@ -97,6 +98,7 @@ public class A2
             writer.println( "Ciphertext C’ DES2: " + des2L.roundOutputs.get(16) );
             writer.println( "Ciphertext C DES3: " + des2K.roundOutputs.get(16) );
             writer.println( "Ciphertext C’ DES3: " + des2L.roundOutputs.get(16) );
+            writer.println("Round    " + "DES0    " + "DES1    " + "DES2    " + "DES3    ");
             outPutAvalanche( avalancheResults2, writer );
         }
         catch ( Exception e )
@@ -137,10 +139,16 @@ public class A2
     {
         for(int i=0; i<17; i++)
         {
-            writer.print(i+" ");
+
+            if (i<10) { writer.print(i + "        "); }
+
+            else { writer.print(i + "       "); }
+
             for(int j=0; j<4; j++)
             {
-                writer.print(avalancheResults.get(j).get(i) +" ");
+                String result = String.valueOf(avalancheResults.get(j).get(i));
+                String padding = String.format("%-8s", result);
+                writer.print(padding);
             }
             writer.print("\n");
         }

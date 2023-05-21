@@ -132,7 +132,7 @@ public abstract class DESBase
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < permutationTable.length; i++)
         {
-            //
+            //permutation operation
             output.append(input.charAt(permutationTable[i] - 1));
         }
         return output.toString();
@@ -160,11 +160,12 @@ public abstract class DESBase
             int row = Integer.parseInt(chunk.charAt(0) + "" + chunk.charAt(5), 2);
             //gets column index from the 4 in between elements of the chunk
             int column = Integer.parseInt(chunk.substring(1, 5), 2);
-
-            String bin = Integer.toBinaryString(sbox[i][row][column]);
+            //gets the binary representation of the sbox replacement
+            StringBuilder bin = new StringBuilder(Integer.toBinaryString(sbox[i][row][column]));
+            //adds 0s for padding if it wasnt equal to 4 bits
             while (bin.length() < 4)
             {
-                bin = "0" + bin;
+                bin.insert(0, "0");
             }
             output.append(bin);
         }

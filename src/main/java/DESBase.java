@@ -4,7 +4,7 @@ import java.util.List;
 public abstract class DESBase
 {
     protected List<String> roundOutputs;
-    protected String plainText;
+    protected String text;
     protected List<String> roundKeys;
 
     public DESBase( String plainText, String key )
